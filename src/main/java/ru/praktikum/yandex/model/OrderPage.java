@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class OrderPage {
-    private static final By ORDER_PAGE = By.className("App_App__15LM-");
+    private static final By ORDER_PAGE = By.className("Order_Form__17u6u");
     private static final By FIRST_NAME_INPUT = By.xpath(".//input[@placeholder='* Имя']");
     private static final By SURNAME_INPUT = By.xpath(".//input[@placeholder='* Фамилия']");
     private static final By ADDRESS_INPUT = By.xpath(".//input[@placeholder='* Адрес: куда привезти заказ']");
@@ -21,7 +21,7 @@ public class OrderPage {
     private static final By DATE_INPUT = By.xpath(".//input[@placeholder='* Когда привезти самокат']");
     private static final By RENTAL_PERIOD_INPUT = By.xpath(".//*[text()='* Срок аренды']");
     private static final By DAYS_INPUT = By.xpath(".//*[text()='пятеро суток']");
-    private static final By ORDER_BUTTON = By.cssSelector("div.Order_Buttons__1xGrp > button:nth-child(2)");
+    private static final By ORDER_BUTTON = By.xpath(".//*[@class='Order_Buttons__1xGrp']/button[text()='Заказать']");
     private static final By MODAL_WINDOW_TEXT = By.className("Order_ModalHeader__3FDaJ");
     private static final By AGREEMENT = By.xpath(".//*[text()='Да']");
     private static final By POPUP = By.partialLinkText("Заказ оформлен");
@@ -36,7 +36,6 @@ public class OrderPage {
     public OrderPage orderPageIsOpen() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(ORDER_PAGE));
-        driver.findElement(ORDER_PAGE).isDisplayed();
         return this;
     }
 
@@ -59,10 +58,8 @@ public class OrderPage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(DATE_INPUT));
         driver.findElement(DATE_INPUT).click();
-        driver.findElement(CHOOSE_DATE_INPUT);
         driver.findElement(CHOOSE_DATE_INPUT).click();
         driver.findElement(RENTAL_PERIOD_INPUT).click();
-        driver.findElement(DAYS_INPUT);
         driver.findElement(DAYS_INPUT).click();
         driver.findElement(ORDER_BUTTON).click();
         return this;

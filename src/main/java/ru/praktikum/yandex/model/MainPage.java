@@ -32,7 +32,6 @@ public class MainPage {
     }
 
     public MainPage clickOrderButton(By orderButton) {
-        driver.findElement(orderButton);
         driver.findElement(orderButton).click();
         return this;
     }
