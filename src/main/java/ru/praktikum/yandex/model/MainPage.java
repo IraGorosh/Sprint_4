@@ -37,9 +37,9 @@ public class MainPage {
         return this;
     }
 
-    public String findAnswer (By questionBy, By answerBy) {
+    public String findAnswer(By questionBy, By answerBy) {
         WebElement element = driver.findElement(FAQ_OBJECT);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
         driver.findElement(questionBy).click();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(answerBy));

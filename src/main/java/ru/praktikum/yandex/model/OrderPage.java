@@ -23,7 +23,7 @@ public class OrderPage {
     private static final By DAYS_INPUT = By.xpath(".//*[text()='пятеро суток']");
     private static final By ORDER_BUTTON = By.cssSelector("div.Order_Buttons__1xGrp > button:nth-child(2)");
     private static final By MODAL_WINDOW_TEXT = By.className("Order_ModalHeader__3FDaJ");
-    private static final By AGREEMENT =  By.xpath(".//*[text()='Да']");
+    private static final By AGREEMENT = By.xpath(".//*[text()='Да']");
     private static final By POPUP = By.partialLinkText("Заказ оформлен");
     private static final By CHOOSE_DATE_INPUT = By.className("react-datepicker__day--today");
 
@@ -33,14 +33,14 @@ public class OrderPage {
         this.driver = driver;
     }
 
-    public OrderPage orderPageIsOpen () {
+    public OrderPage orderPageIsOpen() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(ORDER_PAGE));
         driver.findElement(ORDER_PAGE).isDisplayed();
         return this;
     }
 
-    public OrderPage fillOutPersonalDataToOrderForm (String name, String surname, String address, String phone) {
+    public OrderPage fillOutPersonalDataToOrderForm(String name, String surname, String address, String phone) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.findElement(FIRST_NAME_INPUT).sendKeys(name);
         driver.findElement(SURNAME_INPUT).sendKeys(surname);
@@ -55,7 +55,7 @@ public class OrderPage {
         return this;
     }
 
-    public OrderPage fillOutRentalDataToOrderForm () {
+    public OrderPage fillOutRentalDataToOrderForm() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(DATE_INPUT));
         driver.findElement(DATE_INPUT).click();
@@ -68,7 +68,7 @@ public class OrderPage {
         return this;
     }
 
-    public String setModalAnswer () {
+    public String setModalAnswer() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(MODAL_WINDOW_TEXT));
         driver.findElement(AGREEMENT).click();

@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import ru.praktikum.yandex.model.MainPage;
 import ru.praktikum.yandex.model.OrderPage;
+
 import static org.hamcrest.CoreMatchers.startsWith;
 
 @RunWith(Parameterized.class)
@@ -25,16 +26,16 @@ public class WebTestsOrder {
     private WebDriver driver;
 
     public WebTestsOrder(By orderButton, String userName, String userSurname, String userAddress, String userPhone) {
-            this.orderButton = orderButton;
-            this.userName = userName;
-            this.userSurname = userSurname;
-            this.userAddress = userAddress;
-            this.userPhone = userPhone;
+        this.orderButton = orderButton;
+        this.userName = userName;
+        this.userSurname = userSurname;
+        this.userAddress = userAddress;
+        this.userPhone = userPhone;
     }
 
     @Parameterized.Parameters
     public static Object[][] getAgreement() {
-        return new Object[][] {
+        return new Object[][]{
                 {ORDER_BUTTON, "Ли", "Джон", "г Казань, ул Краснопролетарская, д 4", "+70072484078"},
                 {ORDER_BUTTON_MIDDLE, "Аннамария", "Иванова", "г Москва, ул Килиманджарокофейная, д.234-1,345", "80072486713"},
         };
