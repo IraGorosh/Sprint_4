@@ -27,8 +27,6 @@ public class OrderPage {
     private static final By POPUP = By.partialLinkText("Заказ оформлен");
     private static final By CHOOSE_DATE_INPUT = By.className("react-datepicker__day--today");
 
-
-
     private final WebDriver driver;
 
     public OrderPage(WebDriver driver) {
@@ -56,6 +54,7 @@ public class OrderPage {
         driver.findElement(NEXT_BUTTON).click();
         return this;
     }
+
     public OrderPage fillOutRentalDataToOrderForm () {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(DATE_INPUT));

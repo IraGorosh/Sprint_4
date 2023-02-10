@@ -19,15 +19,19 @@ public class WebTestsFAQ {
     private static final String ANSWER6 ="Самокат приезжает к вам с полной зарядкой. Этого хватает на восемь суток — даже если будете кататься без передышек и во сне. Зарядка не понадобится.";
     private static final String ANSWER7 ="Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои.";
     private static final String ANSWER8 ="Да, обязательно. Всем самокатов! И Москве, и Московской области.";
+
     private final By questionBy;
     private final By answerBy;
     private final String answer;
+
     private WebDriver driver;
+
     public WebTestsFAQ(By questionBy, By answerBy, String answer) {
         this.questionBy = questionBy;
         this.answerBy = answerBy;
         this.answer = answer;
     }
+
     @Parameterized.Parameters
     public static Object[][] getAgreement() {
         return new Object[][] {
@@ -41,6 +45,7 @@ public class WebTestsFAQ {
                 { By.id("accordion__heading-7"), By.id("accordion__panel-7"), ANSWER8},
         };
     }
+
     @Before
     public void setUp() {
         driver = new ChromeDriver();
@@ -48,9 +53,10 @@ public class WebTestsFAQ {
 
     @Test
     public void checkFaqTexts_success() {
-        String answerIsDisplayed = new MainPage(driver).open().findAnswer(questionBy, answerBy);
+        String answerIsDisplayed = new MainPage(driver).open().clickAgreeToCookies().findAnswer(questionBy, answerBy);
         Assert.assertEquals("Ответ с таким текстом не найден", answer, answerIsDisplayed);
     }
+
     @After
     public void cleanUp() {
         driver.quit();
