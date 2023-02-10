@@ -23,8 +23,10 @@ public class OrderPage {
     private static final By DAYS_INPUT = By.xpath(".//*[text()='пятеро суток']");
     private static final By ORDER_BUTTON = By.cssSelector("div.Order_Buttons__1xGrp > button:nth-child(2)");
     private static final By MODAL_WINDOW_TEXT = By.className("Order_ModalHeader__3FDaJ");
+    private static final By AGREEMENT =  By.xpath(".//*[text()='Да']");
     private static final By POPUP = By.partialLinkText("Заказ оформлен");
-    private static final By CHOOSE_DATE_INPUT = By.xpath(".//div[@aria-label='Choose вторник, 14-е февраля 2023 г.']");
+    private static final By CHOOSE_DATE_INPUT = By.className("react-datepicker__day--today");
+
 
 
     private final WebDriver driver;
@@ -40,21 +42,25 @@ public class OrderPage {
         return this;
     }
 
-    public OrderPage fillOutOrderForm () {
+    public OrderPage fillOutPersonalDataToOrderForm (String name, String surname, String address, String phone) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        driver.findElement(FIRST_NAME_INPUT).sendKeys("Ирина");
-        driver.findElement(SURNAME_INPUT).sendKeys("Иванова");
-        driver.findElement(ADDRESS_INPUT).sendKeys("Московская 37");
+        driver.findElement(FIRST_NAME_INPUT).sendKeys(name);
+        driver.findElement(SURNAME_INPUT).sendKeys(surname);
+        driver.findElement(ADDRESS_INPUT).sendKeys(address);
         driver.findElement(METRO_INPUT).click();
         WebElement element = driver.findElement(METRO1_INPUT);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
         driver.findElement(METRO1_INPUT).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(PHONE_INPUT));
-        driver.findElement(PHONE_INPUT).sendKeys("80006818766");
+        driver.findElement(PHONE_INPUT).sendKeys(phone);
         driver.findElement(NEXT_BUTTON).click();
+        return this;
+    }
+    public OrderPage fillOutRentalDataToOrderForm () {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(DATE_INPUT));
         driver.findElement(DATE_INPUT).click();
-        driver.findElement(DATE_INPUT).sendKeys("14.02.2023");
+        driver.findElement(CHOOSE_DATE_INPUT);
         driver.findElement(CHOOSE_DATE_INPUT).click();
         driver.findElement(RENTAL_PERIOD_INPUT).click();
         driver.findElement(DAYS_INPUT);
@@ -63,11 +69,11 @@ public class OrderPage {
         return this;
     }
 
-    public boolean agreementModalWindow (By agreement) {
+    public String setModalAnswer () {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(MODAL_WINDOW_TEXT));
-        driver.findElement(agreement).click();
+        driver.findElement(AGREEMENT).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(POPUP));
-        return driver.findElement(POPUP).isDisplayed();
+        return driver.findElement(POPUP).getText();
     }
 }

@@ -43,7 +43,6 @@ public class WebTestsFAQ {
     }
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "/Users/irinagorosh/chromedriver_mac64/chromedriver");
         driver = new ChromeDriver();
     }
 
